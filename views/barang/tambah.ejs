@@ -1,0 +1,95 @@
+<%- include('../partials/header', { title: title }) %>
+
+<div class="page-header">
+    <div>
+        <p class="page-label">INVENTORY</p>
+        <h1>Tambah Barang</h1>
+        <p class="page-description">Masukkan data barang baru ke dalam inventaris.</p>
+    </div>
+
+    <a href="/barang" class="btn btn-secondary">
+        ← Kembali
+    </a>
+</div>
+
+<div class="content-card form-card">
+    <form action="/barang/tambah" method="POST">
+
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="nama_barang">Nama Barang</label>
+                <input
+                    type="text"
+                    id="nama_barang"
+                    name="nama_barang"
+                    placeholder="Masukkan nama barang"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="kategori">Kategori</label>
+                <input
+                    type="text"
+                    id="kategori"
+                    name="kategori"
+                    placeholder="Contoh: Sembako"
+                    required
+                >
+            </div>
+
+            <div class="form-group full-width">
+                <label for="deskripsi">Deskripsi</label>
+                <textarea
+                    id="deskripsi"
+                    name="deskripsi"
+                    placeholder="Masukkan deskripsi barang"
+                    rows="4"
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="harga">Harga</label>
+                <input
+                    type="number"
+                    id="harga"
+                    name="harga"
+                    placeholder="Masukkan harga"
+                    min="0"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="stok">Stok</label>
+                <input
+                    type="number"
+                    id="stok"
+                    name="stok"
+                    placeholder="Masukkan jumlah stok"
+                    min="0"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select id="status" name="status" required>
+                    <option value="Tersedia">Tersedia</option>
+                    <option value="Habis">Habis</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <a href="/barang" class="btn btn-secondary">Batal</a>
+
+            <button type="submit" class="btn btn-primary">
+                Simpan Barang
+            </button>
+        </div>
+
+    </form>
+</div>
+
+<%- include('../partials/footer') %>

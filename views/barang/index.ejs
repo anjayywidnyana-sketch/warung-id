@@ -1,0 +1,79 @@
+<%- include('../partials/header', { title: title }) %>
+
+<div class="page-header">
+    <div>
+        <p class="page-label">INVENTORY</p>
+        <h1>Data Barang</h1>
+        <p class="page-description">Kelola seluruh data barang Warung ID dengan mudah.</p>
+    </div>
+
+    <a href="/barang/tambah" class="btn btn-primary">
+        + Tambah Barang
+    </a>
+</div>
+
+<div class="content-card">
+    <div class="card-header">
+        <div>
+            <h2>Daftar Barang</h2>
+            <p>Total barang: <%= barang.length %></p>
+        </div>
+    </div>
+
+    <% if (barang.length === 0) { %>
+        <div class="empty-state">
+            <h3>Belum ada data barang</h3>
+            <p>Silakan tambahkan barang baru untuk memulai.</p>
+        </div>
+    <% } else { %>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Barang</th>
+                        <th>Kategori</th>
+                        <th>Deskripsi</th>
+                        <th>Harga</th>
+                        <th>Stok</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% barang.forEach((item, index) => { %>
+                        <tr>
+                            <td><%= index + 1 %></td>
+                            <td><strong><%= item.nama_barang %></strong></td>
+                            <td><%= item.kategori %></td>
+                            <td><%= item.deskripsi || '-' %></td>
+                            <td>Rp <%= Number(item.harga).toLocaleString('id-ID') %></td>
+                            <td><%= item.stok %></td>
+                            <td>
+                                <span class="status <%= item.status === 'Tersedia' ? 'available' : 'empty' %>">
+                                    <%= item.status %>
+                                </span>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="/barang/edit/<%= item.id %>" class="btn-edit">
+                                        Edit
+                                    </a>
+
+                                    <form action="/barang/hapus/<%= item.id %>" method="POST" onsubmit="return confirm('Yakin ingin menghapus barang ini?')">
+                                        <button type="submit" class="btn-delete">
+                                            Hapus
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    <% } %>
+</div>
+
+<%- include('../partials/footer') %>
